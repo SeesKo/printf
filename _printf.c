@@ -8,17 +8,22 @@
 
 int _printf(const char *format, ...)
 {
-	int i;
-	char count_char;
+	int i, count_char = 0;
 	va_list args;
 
 	va_start(args, format);
+
+	if (format == NULL)
+	{
+		va_end(args);
+		return (-1);
+	}
 
 	for (i = 0; format[i] != '\0'; i++) /* Iterate through characters */
 	{
 		if (format[i] != '%') /* Print character if it's not '%' */
 		{
-			putchar(format[i]);
+			printchar(format[i]);
 			count_char++;
 		}
 		else
@@ -27,7 +32,7 @@ int _printf(const char *format, ...)
 			switch (format[i])
 			{
 				case 'c': /* Handling characters */
-					putchar(va_arg(args, int));
+					printchar(va_arg(args, int));
 					count_char++; /* Updating char count */
 					break;
 				case 's': /* Handling strings */
@@ -35,12 +40,12 @@ int _printf(const char *format, ...)
 					count_char++; /* Updating char count */
 					break;
 				case '%': /* Handling '%' symbol */
-					putchar('%');
+					printchar('%');
 					count_char++;
 					break;
 				default: /* Because '%' introduces format specifiers */
-					putchar('%');
-					putchar(format[i]); /* Char following '%' */
+					printchar('%');
+					printchar(format[i]); /* Char following '%' */
 					count_char += 2; /* Add by +2 because '%' and subsequent character */
 					break;
 			}
