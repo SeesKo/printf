@@ -10,7 +10,10 @@ int putstr(char *str)
 {
 	int i;
 
-	for (i = 0; str[i] != '\0'; ++i)
-		printchar(str[i]);
+	if (str)
+	{
+		for (i = 0; str[i] != '\0'; i++)
+			printchar(str[i]);
+	}
 	return (i);
 }
