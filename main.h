@@ -8,5 +8,6 @@
 
 int printchar(char c);
 int _printf(const char *format, ...);
+int putstr(char *str);
 
 #endif /* MAIN_H */
