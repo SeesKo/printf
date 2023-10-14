@@ -8,48 +8,40 @@
 
 int _printf(const char *format, ...)
 {
-	int i, count_char = 0;
+	int i, count_str, count_char = 0;
 	va_list args;
 
 	va_start(args, format);
 
-	if (format == NULL)
+	if (!format || (format[0] == '%' && format[1] == '\0')) /* Check NULL/Empty */
+	{
+		return (-1);
+	}
+	for (i = 0; format[i] != '\0'; i++) /* Iterate through characters */
+	{
+		if (format[i] != '%')
+		{
+			printchar(format[i]); /* Print regular char */
+		}
+		else if (format[i + 1] == 'c')
+		{
+			printchar(va_arg(args, int)); /* Print char */
+			i++;
+		}
+		else if (format[i + 1] == 's')
+		{
+			count_str = printf("%s", va_arg(args, char *)); /* Print string */
+			i++;
+			count_char += (count_str - 1); /* String minus format specifier */
+		}
+		else if (format[i + 1] == '%')
+			printchar('%'); /* Literally print '%' */
+		count_char += 1;
+	}
+	if (format[i - 1] == '%') /* See if previous char is '%' with no specifier */
 	{
 		va_end(args);
 		return (-1);
-	}
-
-	for (i = 0; format[i] != '\0'; i++) /* Iterate through characters */
-	{
-		if (format[i] != '%') /* Print character if it's not '%' */
-		{
-			printchar(format[i]);
-			count_char++;
-		}
-		else
-		{
-			i++; /* Moving past '%' after encountering it */
-			switch (format[i])
-			{
-				case 'c': /* Handling characters */
-					printchar(va_arg(args, int));
-					count_char++; /* Updating char count */
-					break;
-				case 's': /* Handling strings */
-					printf("%s", va_arg(args, char *));
-					count_char++; /* Updating char count */
-					break;
-				case '%': /* Handling '%' symbol */
-					printchar('%');
-					count_char++;
-					break;
-				default: /* Because '%' introduces format specifiers */
-					printchar('%');
-					printchar(format[i]); /* Char following '%' */
-					count_char += 2; /* Add by +2 because '%' and subsequent character */
-					break;
-			}
-		}
 	}
 	va_end(args);
 	return (count_char);
