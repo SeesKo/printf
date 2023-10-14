@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i + 1] == 's')
 		{
-			count_str = printf("%s", va_arg(args, char *)); /* Print string */
+			count_str = putstr(va_arg(args, char *)); /* Print string */
 			i++;
 			count_char += (count_str - 1); /* String minus format specifier */
 		}
