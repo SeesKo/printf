@@ -9,22 +9,16 @@
 
 int printnum(long num, int base)
 {
-int count_char;
-char *values = "0123456789abcdef";
+        int count_char;
+        char *values = "0123456789abcdef";
 
-if (num < 0)
-{
-printchar('-');
-return (printnum(-num, base) + 1);
-}
-else if (num < base)
-return (printchar(values[num]));
-
-else
-{
-count_char = printnum(num / base, base);
-return (count_char + printnum(num % base, base));
-}
-count_char = printnum(num / base, base);
-return (count_char + printnum(num % base, base));
+        if (num < 0)
+        {
+                printchar('-');
+                return (printnum(-num, base) + 1);
+        }
+        else if (num < base)
+                return (printchar(values[num]));
+        count_char = printnum(num / base, base);
+        return (count_char + printnum(num % base, base));
 }
