@@ -14,14 +14,16 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
+	/* Looping through characters */
 	for (i = 0; format[i] != '\0'; i++)
 	{
+		/* Check for format specifier */
 		if (format[i] == '%')
 		{
-			i++;
+			i++; /* Move to next character after '%' */
 			count_char += print_format(format[i], args);
 		}
-		else
+		else /* Print regular characters */
 			count_char += printchar(format[i]);
 	}
 	va_end(args);
