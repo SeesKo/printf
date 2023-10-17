@@ -11,6 +11,7 @@ int _printf(const char *format, ...)
 	int i;
 	int count_char = 0;
 	va_list args;
+	char *str;
 
 	va_start(args, format);
 
@@ -21,7 +22,15 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++; /* Move to next character after '%' */
-			count_char += print_format(format[i], args);
+			if (format[i] == 's')
+			{
+				str = va_arg(args, char *);
+				if (str == NULL)
+					return (0);
+				count_char += printstr(str);
+			}
+			else
+				count_char += print_format(format[i], args);
 		}
 		else /* Print regular characters */
 			count_char += printchar(format[i]);
