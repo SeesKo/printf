@@ -20,13 +20,13 @@ int print_format(char specifier, va_list args)
 	else if (specifier == 'd' || specifier == 'i')
 		count_char += printnum((long)(va_arg(args, int)), 10);
 	else if (specifier == 'u')
-		count_char += printnum((long)(va_arg(args, unsigned int)), 10);
+		count_char += printnum(va_arg(args, unsigned int), 10);
 	else if (specifier == 'o')
-		count_char += printnum((long)(va_arg(args, unsigned int)), 8);
+		count_char += printnum(va_arg(args, unsigned int), 8);
 	else if (specifier == 'x')
-		count_char += printhex((unsigned int)(va_arg(args, unsigned int)), 'x');
+		count_char += printhex(va_arg(args, unsigned int), 'x');
 	else if (specifier == 'X')
-		count_char += printhex((unsigned int)(va_arg(args, unsigned int)), 'X');
+		count_char += printhex(va_arg(args, unsigned int), 'X');
 	else if (specifier == 'p')
 		count_char += putaddress(va_arg(args, void*));
 	else if (specifier == '%')
