@@ -13,6 +13,9 @@ int print_format(char specifier, va_list args)
 
 	count_char = 0;
 
+	if (specifier == '\0')
+		count_char += printstr("(null)");
+
 	if (specifier == 'c')
 		count_char += printchar(va_arg(args, int));
 	else if (specifier == 's')
