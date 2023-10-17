@@ -25,9 +25,10 @@ int _printf(const char *format, ...)
 			if (format[i] == 's')
 			{
 				str = va_arg(args, char *);
-				if (str == NULL)
-					return (0);
-				count_char += printstr(str);
+				if (str != NULL)
+					count_char += printstr(str);
+				else
+					count_char += printstr("(null)");
 			}
 			else
 				count_char += print_format(format[i], args);
