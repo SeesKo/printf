@@ -19,7 +19,9 @@ int printnum(long num, int base)
 	}
 	else if (num < base)
 		return (printchar(values[num]));
-
-	count_char = printnum(num / base, base);
-	return (count_char + printnum(num % base, base));
+	else
+	{
+		count_char = printnum(num / base, base);
+		return (count_char + printnum(num % base, base));
+	}
 }
