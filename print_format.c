@@ -29,8 +29,6 @@ int print_format(char specifier, va_list args)
 		count_char += printhex(va_arg(args, unsigned int), 'X');
 	else if (specifier == 'p')
 		count_char += putaddress(va_arg(args, void*));
-	else if (specifier == '%')
-		count_char += printchar('%');
 	else
 	{
 		count_char += printchar('%');
