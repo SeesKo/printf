@@ -31,6 +31,8 @@ int _printf(const char *format, ...)
 				else
 					count_char += printstr("(null)");
 			}
+			else if (format[i] == '%')
+				count_char += printchar('%');
 			else
 				count_char += print_format(format[i], args);
 		}
