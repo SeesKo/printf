@@ -12,9 +12,11 @@ int _printf(const char *format, ...)
 	int count_char = 0;
 	va_list args;
 	char *str;
-	void *ptr;
 
 	va_start(args, format);
+
+	if (format == NULL)
+		return (-1);
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
@@ -26,14 +28,6 @@ int _printf(const char *format, ...)
 				str = va_arg(args, char *);
 				if (str != NULL)
 					count_char += printstr(str);
-				else
-					count_char += printstr("(null)");
-			}
-			else if (format[i] == 'p')
-			{
-				ptr = va_arg(args, void *);
-				if (ptr != NULL)
-					count_char += putaddress(ptr);
 				else
 					count_char += printstr("(null)");
 			}
