@@ -11,9 +11,7 @@ int printstr(char *str)
 	int i, count = 0;
 
 	for (i = 0; str[i] != '\0'; i++)
-	{
-		printchar(str[i]);
-		count++;
-	}
+		count += printchar(str[i]);
+
 	return (count);
 }
