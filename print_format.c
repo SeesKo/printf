@@ -9,16 +9,14 @@
 
 int print_format(char specifier, va_list args)
 {
-	int count_char;
-
-	count_char = 0;
+	int count_char = 0;
 
 	if (specifier == 'c')
 		count_char += printchar(va_arg(args, int));
 	else if (specifier == 's')
 		count_char += printstr(va_arg(args, char *));
 	else if (specifier == 'd' || specifier == 'i')
-		count_char += printnum((long)(va_arg(args, int)), 10);
+		count_char += printnum(va_arg(args, int), 10);
 	else if (specifier == 'u')
 		count_char += printnum(va_arg(args, unsigned int), 10);
 	else if (specifier == 'o')
